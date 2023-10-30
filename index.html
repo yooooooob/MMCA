@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>국립현대미술관</title>
+    <link rel="stylesheet" href="css/index.css">
+    <!-- https://animate.style/ -->
+    <link rel="stylesheet" href="css/animate.min.css">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script>
+        $(function () {
+
+            $('.login_pop').click(function () {
+                $('.login').css({
+                    'display': 'flex'
+                });
+
+                $('body').addClass('on');
+            });
+
+            $('.menu_close').click(function () {
+                $('.login').css({
+                    'display': 'none'
+                });
+            })
+
+            var swiper = new Swiper(".mySwiper", {
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+            });
+
+            $('.depth01 > a').click(function () {
+                if ($(this).next().css('display') == 'none') {
+                    $('.depth02').slideUp();
+                    $(this).next().slideDown();
+
+                    $('.depth01 > a').removeClass('on');
+                    $(this).addClass('on');
+
+                } else {
+                    $(this).next().slideUp();
+
+                    $('.depth01 > a').removeClass('on');
+                }
+            });
+
+            //메뉴닫기
+            $('.menu_close').click(function () {
+                $('nav').animate({
+                    'right': '-100%'
+                })
+
+                $('body').removeClass('on');
+
+            });
+
+            //메뉴보기
+            $('.menu_open').click(function () {
+                $('nav').animate({
+                    'right': '0'
+                }, 700, 'easeOutCirc')
+
+                $('body').addClass('on');
+
+            });
+
+            let menuWidth = $('.user li').outerWidth();
+            $('.bar').css({
+                'width': menuWidth,
+
+            });
+
+            //cont start!
+            //now on mmca _ tab
+            $('.now_tab > ul li').click(function () {
+                $('.now_tab > ul li').removeClass('on');
+                $(this).addClass('on');
+
+                $('.now .list').removeClass('on');
+                $('.now .list').eq($(this).index()).addClass('on');
+
+            });
+
+            //arc
+            $('.no_list div').mouseenter(function () {
+                $('.arc_bg  div').hide();
+                $('.arc_bg div').eq($(this).index()).show();
+            });
+
+            $('.no_list div').mouseleave(function () {
+                $('.arc_bg div').hide();
+            });
+
+
+            //follow us
+            var swiper = new Swiper(".follow", {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            });
+
+
+            //top pixed
+            let headerTop = $('header').offset().top
+            let cont01Top = $('.main_visual').offset().top
+
+            console.log($('.main_visual').offset().top)
+
+            $(window).scroll(function () {
+
+                if (headerTop < $(window).scrollTop()) {
+                    $('header').addClass('on')
+                } else {
+                    $('header').removeClass('on')
+                }
+                if (cont01Top < $(window).scrollTop()) {
+                    $('.talk_btn a').fadeIn().css({
+                        'display': 'block'
+                    });
+                    $('.talk_btn').fadeIn()
+                    $('.top').fadeIn();
+
+                } else {
+                    $('.top').fadeOut();
+                    $('.talk_btn').fadeOut();
+                }
+
+            });//window.scroll();
+
+
+            $('.top').click(function () {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 2000)
+
+            });//.top.click()
+
+
+            //talk버튼
+            $('.talk_btn .talk').click(function () {
+                $('.chat_wrap').toggleClass('on')
+            })
+
+            $("input[type='text']").keypress(function (e) {
+                if (e.keyCode == 13 && $(this).val().length) {
+                    var _val = $(this).val();
+                    var _class = $(this).attr("class");
+                    $(this).val('');
+                    var _tar = $(".chat_wrap .inner").append('<div class="item ' + _class + '"><div class="box"><p class="msg">' + _val + '</p><span class="time">' + currentTime() + '</span></div></div>');
+
+                    var lastItem = $(".chat_wrap .inner").find(".item:last");
+                    setTimeout(function () {
+                        lastItem.addClass("on");
+                    }, 10);
+
+                    var position = lastItem.position().top + $(".chat_wrap .inner").scrollTop();
+                    console.log(position);
+
+                    $(".chat_wrap .inner").stop().animate({ scrollTop: position }, 500);
+                }
+            });
+
+            var currentTime = function () {
+                var date = new Date();
+                var hh = date.getHours();
+                var mm = date.getMinutes();
+                var apm = hh > 12 ? "오후" : "오전";
+                var ct = apm + " " + hh + ":" + mm + "";
+                return ct;
+            }
+
+
+        }); // jquery end
+
+    </script>
+
+</head>
+
+<body>
+    <header>
+        <div class="inner">
+
+            <div class="hd_top">
+                <h1>
+                    <a href="#">
+                        <img src="img/logo.svg" alt="main_logo">
+                    </a>
+                </h1>
+
+                <div>
+                    <div class="header_menu">
+
+                        <ul class="user">
+
+                            <li class="login_pop"><a href="#">LOGIN</a></li>
+                            <li><a href="#">BE COME A MEMBER</a></li>
+                            <li><a href="#">KOR</a></li>
+
+                        </ul><!-- .user end -->
+
+                        <div class="bar">
+                            <span>메뉴바</span>
+                        </div>
+                    </div>
+
+                    <div class="menu_open">
+                        <a chref="#">
+                            <img src="img/메뉴-50 (3).png" alt="메뉴열기">
+                        </a>
+                    </div><!-- .menu_open  -->
+                </div>
+            </div>
+
+            <nav>
+                <div class="menu_close">
+                    <img src="img/menu_close_wh-50 .png" alt="close_icon">
+                </div><!-- .menu_close end -->
+
+                <ul class="gnb">
+
+                    <li class="depth01">
+                        <a href="#">Exhibition</a>
+
+                        <ul class="depth02">
+                            <li><a href="#">현재전시</a></li>
+                            <li><a href="#">지난전시</a></li>
+                            <li><a href="#">전시일정</a></li>
+                            <li><a href="#">관람정보</a></li>
+
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+
+                    <li class="depth01">
+                        <a href="#">Program</a>
+                        <ul class="depth02">
+                            <li><a href="#">프로그램 소개</a></li>
+                            <li><a href="#">프로그램 예약</a></li>
+                            <li><a href="#">프로그램 일정</a></li>
+                            <li><a href="#">어린이미술관 안내</a></li>
+
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+
+                    <li class="depth01">
+                        <a href="#">Archive</a>
+
+                        <ul class="depth02">
+                            <li><a href="#">MMCA 소장품</a></li>
+                            <li><a href="#">MMCA 작가지원</a></li>
+                            <li><a href="#">MMCA 온택트</a></li>
+                            <li><a href="#">MMCA 자료실</a></li>
+
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+
+                    <li class="depth01">
+                        <a href="#">Digital Museum</a>
+
+                        <ul class="depth02">
+                            <li><a href="#">현재전시</a></li>
+                            <li><a href="#">지난전시</a></li>
+                            <li><a href="#">전시일정</a></li>
+                            <li><a href="#">디지털아카이브</a></li>
+
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+
+                    <li class="depth01">
+                        <a href="#">MMCA Talk</a>
+
+                        <ul class="depth02">
+                            <li><a href="#">방문자 Review</a></li>
+                            <li><a href="#">방문자 Pick</a></li>
+                            <li><a href="#">News Letter</a></li>
+                            <li><a href="#">FAQ</a></li>
+
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                </ul>
+
+                <div class="search_box">
+
+                    <input type="text" class="search_box__text1" placeholder="궁금하신 점을 검색하세요." class="search_box">
+
+                    <div class="icon">
+
+                        <a href="#">
+                            <img src="img/search.png" alt="search">
+                        </a>
+
+                    </div>
+                </div><!-- .search_box end -->
+            </nav>
+        </div><!-- .inner end -->
+    </header>
+
+
+    <!--  main  -->
+
+    <main>
+        <section class="main_visual">
+
+            <!-- Swiper -->
+
+            <div class="swiper mySwiper">
+
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <img src="img/main_s__01.jpg" alt="main_01_slide">
+                        <h2>젊은 모색 2023: 미술관을 위한 주석</h2>
+                        <p>Young Korean Artists 2023:
+                            Annotaing the museum.</p>
+
+                        <div>
+                            <a href="#">전시 예약하기</a>
+                        </div>
+
+                    </div>
+
+                    <div class="swiper-slide">
+                        <img src="img/main_s_02.jpg" alt="main_02_slide">
+                        <h2>동녘에서 거닐다: 동산 박주환 컬렉션 특별전</h2>
+                        <p>Strolling through Nature : The Dongsan
+                            Park Joohwan Collection</p>
+
+                        <div>
+                            <a href="#">전시 예약하기</a>
+                        </div>
+
+                    </div>
+
+                    <div class="swiper-slide">
+                        <img src="img/main__03.jpg" alt="main_03_slide">
+                        <h2>MMCA 이건희컬렉션 특별전</h2>
+                        <p>모네와 피카소, 파리의 아름다운 순간들</p>
+
+                        <div>
+                            <a href="#">전시 예약하기</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section><!-- .main_visual end -->
+
+
+        <section class="now">
+
+            <div class="inner ">
+                <div class="title">
+                    <h3>Now On MMCA</h3>
+                    <a href="#"> 전체보기 </a>
+                </div>
+
+                <div class="now_tab">
+                    <ul>
+                        <li class="on">서울</li>
+                        <li>과천</li>
+                        <li>덕수궁</li>
+                        <li>청주</li>
+                    </ul>
+                </div><!-- .now_tab end -->
+
+                <div class="list on">
+
+                    <div class="item">
+                        <img src="img/now_s_01.jpg" alt="백투더퓨처">
+
+                        <div>
+                            <p>백 투 더 퓨처: 한국 현대미술의 동시대성 탐험기</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                    <div class="item">
+                        <img src="img/now_s_02.png" alt="전자적 숲_그린포스터">
+
+                        <div>
+                            <p>전자적 숲 : 소진된 인간</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                    <div class="item">
+                        <img src="img/now_s_03.jpeg" alt="게임사회">
+
+                        <div>
+                            <p>게임사회: GAME SOCIETY </p>
+                        </div>
+                    </div><!-- .item end -->
+
+                </div><!-- .list_서울 end -->
+
+                <div class="list">
+
+                    <div class="item">
+                        <img src="img/now_g_01.png" alt="동녁에서 거닐다">
+
+                        <div>
+                            <p>동녘에서 거닐다: 동산 박주환 컬렉션 특별전</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                    <div class="item">
+                        <img src="img/now_g_02.png" alt="젋은 모색">
+
+                        <div>
+                            <p>젊은 모색 2023: 미술관을 위한 주석</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                    <div class="item">
+                        <img src="img/now_g_03.JPG" alt="다다익선">
+
+                        <div>
+                            <p>다다익선: 즐거운 협연 </p>
+                        </div>
+                    </div><!-- .item end -->
+
+                </div><!-- .list_과천 end -->
+
+                <div class="list">
+
+                    <div class="item">
+                        <img src="img/now_d_01.png" alt="장욱진회고전">
+
+                        <div>
+                            <p>가장 진지한 고백: 장욱진 회고전</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                    <div class="item">
+                        <img src="img/now_d_02.jpg" alt="한국근대자수">
+
+                        <div>
+                            <p>한국 근대 자수 : 미술공예</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                    <div class="item">
+                        <img src="img/now_d_03.png" alt="우주를 향하여_바이올린">
+
+                        <div>
+                            <p> 문신(文信) : 우주를 향하여 </p>
+                        </div>
+                    </div><!-- .item end -->
+
+                </div><!-- .list_ 덕수궁 end -->
+
+                <div class="list">
+
+                    <div class="item">
+                        <img src="img/now_ch__01.png" alt="릴레이퍼포먼스">
+
+                        <div>
+                            <p>국립현대미술관 청주 다원예술 릴레이 퍼포먼스</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                    <div class="item">
+                        <img src="img/now_ch__02.png" alt="전시의 전시">
+
+                        <div>
+                            <p> 전시의 전시 : 기술</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                    <div class="item">
+                        <img src="img/now_ch__03.png" alt="이건희컬렉션">
+
+                        <div>
+                            <p>보이는 수장고 : MMCA 이건희컬렉션 2</p>
+                        </div>
+                    </div><!-- .item end -->
+
+                </div><!-- .list_청주 end -->
+
+
+            </div><!-- .inner end -->
+        </section><!-- .now end -->
+
+
+
+        <!-- pro -->
+        <section class="pro">
+            <div class="title">
+                <h3>Program</h3>
+                <a href="#"> 프로그램 전체보기 </a>
+            </div><!-- .title end -->
+
+            <div class="list">
+
+                <div class="item">
+                    <a href="#">
+                        <figure>
+                            <img src="img/pro_01.png" alt="미술학교">
+                        </figure>
+
+                        <div>
+                            <ul>
+                                <li class="gray">진행중</li>
+                                <li>서울</li>
+                            </ul>
+
+                            <h4>2022 연구교사 모임<미술관U학교>
+                            </h4>
+                            <p>교육대상 : 중등교사</p>
+                            <p>국립현대미술관 서울 및 온라인</p>
+                            <span>[2022-04-25 ~ 2023-12-31]</span>
+                        </div>
+                    </a>
+                </div><!-- .item end  _________________________________#1 -->
+
+                <div class="item">
+                    <a href="#">
+                        <figure>
+                            <img src="img/pro_02.png" alt="미술학교">
+                        </figure>
+
+                        <div>
+                            <ul>
+                                <li class="gray">진행중</li>
+                                <li>서울</li>
+                            </ul>
+
+                            <h4>작품감상 교육: 박래현</h4>
+
+                            <p>교육대상 : 전국 중고등학교</p>
+                            <p>국립현대미술관 서울 및 온라인</p>
+                            <span>[2023-01-16 ~ 2023-12-30]</span>
+                        </div>
+                    </a>
+                </div><!-- .item end   _________________________________#2-->
+
+                <div class="item">
+                    <a href="#">
+                        <figure>
+                            <img src="img/pro_03.png" alt="이중섭">
+                        </figure>
+
+                        <div>
+                            <ul>
+                                <li class="pink">진행예정</li>
+                                <li>덕수궁</li>
+                            </ul>
+
+                            <h4>이중섭, 투계(1955)
+                            </h4>
+                            <p>교육대상 : 전국 중등학교</p>
+                            <p>국립현대미술관 서울 및 온라인</p>
+                            <span>[2022-04-25 ~ 2023-12-30]</span>
+                        </div>
+                    </a>
+                </div><!-- .item end   _________________________________#3-->
+
+                <div class="item">
+                    <a href="#">
+                        <figure>
+                            <img src="img/pro_04.png" alt="어린이미술관">
+                        </figure>
+
+                        <div>
+                            <ul>
+                                <li class="green">지점문의</li>
+                                <li>청주</li>
+                            </ul>
+
+                            <h4>예술가의 지구별연구소
+                            </h4>
+                            <p>교육대상 : 중등교사</p>
+                            <p>어린이미술관</p>
+                            <span>[2023-05-04 ~ 2023-12-17]</span>
+                        </div>
+                    </a>
+                </div><!-- .item end   _________________________________#4-->
+
+
+            </div><!-- .list end -->
+
+
+        </section><!-- .pro end -->
+
+
+
+
+        <!-- arc -->
+
+        <section class="arc">
+            <div class="inner">
+
+                <div class="title">
+                    <h3>Archive</h3>
+                    <p>자연에 기반한 기하학적 추상,<br />
+                        유영국<산>
+                    </p>
+                    <a href="#">소장품 더보기</a>
+
+                </div><!-- .title end -->
+
+                <div class="no_list">
+
+                    <div>
+                        <a href="#">
+                            <h4>#NO.1</h4>
+                            <p>국립현대미술관 소장품으로 "물 멍"때려볼까?</p>
+                            <strong>신문용,<물결>(2002)</strong>
+                        </a>
+                    </div><!-- ******1 -->
+
+                    <div>
+                        <a href="#">
+                            <h4>#NO.2</h4>
+                            <p>구겐하임미술관 공동기획,<br />
+                                "한국 실험 미술 1960-70년대"</p>
+                            <strong>한국 실험미술,<1960-70년대></strong>
+                        </a>
+                    </div><!-- ******2 -->
+
+                    <div>
+                        <a href="#">
+                            <h4>#NO.3</h4>
+                            <p>백자에서 시작된 여정,<br />
+                                공생하는 세계로의 여행</p>
+                            <strong>이수경,<번역된도자기> </strong>
+                        </a>
+                    </div><!-- ******3 -->
+
+                </div><!-- .vol_list end -->
+
+            </div><!-- .inner end -->
+
+
+            <div class="arc_bg">
+
+                <div class="bg1">
+                    <span>첫번째 아이템 배경이미지</span>
+                </div>
+
+                <div class="bg2">
+                    <span>두번째 아이템 배경이미지</span>
+                </div>
+
+                <div class="bg3">
+                    <span>세번째 아이템 배경이미지</span>
+                </div>
+
+            </div><!-- .arc_bg end -->
+
+        </section><!-- .arc end -->
+
+
+        <!-- Gallery -->
+
+        <div class="g_top">
+            <h3>Gallery</h3>
+        </div><!-- .g_top end -->
+
+        <section class="gallery"> <!-- width:1440px -->
+
+            <div class="left"> <!-- position : sticky -->
+
+                <div class="inner">
+                    <video controls autoplay muted loop>
+                        <source src="img/mmca_re_httpsinfinite_co_krportfoliommca.mp4" type="video/mp4">
+                    </video>
+
+                    <div class="text">
+                        <p> JULY 2023 - ISSUE 60 </p>
+                        <h1>DESIGN YOUR LIFE</h1>
+                    </div><!-- .text end -->
+                </div><!-- .inner end -->
+
+            </div><!-- .left end -->
+
+            <div class="right">
+
+                <div class="list">
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/arc_01.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>유영국<산>
+                            </h1>
+                            <p>자연에 기반한 기하학적 추상
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/pro_01.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>미술관학교</h1>
+                            <p> MMCA와 함께하는 미술관학교에 견학오세요.
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/pro_03.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>이중섭, <투계(1955)>
+                            </h1>
+                            <p> 바캉스 계절에 즐기는 다채로운 무드의 비치 웨어 아이템.
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_s_02.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>Meditation on YouTube</h1>
+                            <p> 전자적 숲 : 소진된 인간
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_ch_02.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>Digital Story</h1>
+                            <p> 디지털 스토리 : 이야기가 필요해
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_ch_01.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>Relay Performance</h1>
+                            <p> MMCA와 함께 즐기는 다채로운 전시.
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_ch__02.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>전시의 전시</h1>
+                            <p> 전시를 단어 그대로 풀어 쓴다면 여러 가지를 한곳에 펼쳐(展) 보여주는(示) 것을 느낄수 있다.
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_ch__03.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>MMCA 이건희 컬렉션</h1>
+                            <p> 보이는 수장고 : MMCA 이건희컬렉션
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                </div><!-- .list end -->
+
+                <div class="list">
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/gallery_01.PNG" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>김구림 작가의 예술세계</h1>
+                            <p>다양한 매체, 장르, 주제를 넘나들며 예술의 최전선에서 독자적인 영역을 만날 수 있다.
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/gallery_02.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>PICASSO CERAMICS</h1>
+                            <p> MMCA 소장품전 : 피카소 도예
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_g_03.JPG" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>The More, The Better</h1>
+                            <p>다다익선: 즐거운 협연
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_s_03.jpeg" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>Game Society : 게임사회</h1>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/arc_02.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>신문용, <물결(2002)>
+                            </h1>
+                            <p> MMCA 소장품 속으로 다함께 '물멍' 때리러오세요.
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_g_01.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>동산 박주환 컬렉션 특별전</h1>
+                            <p>Strolling through Nature
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_d_03.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>文信 문신, MOON SHIN</h1>
+                            <p> TOWARDS THE UNIVERSE
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+                </div>
+
+                <div class="list">
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/gallery_03.jpg" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>MMCA 현대차 시리즈 2023</h1>
+                            <p> 바캉스 계절에 즐기는 다채로운 무드의 비치 웨어 아이템.
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/arc_03.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>한국실험미술,1960-70년대</h1>
+                            <p>구겐하임미술관 공동기획
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/gallery_04.PNG" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>강운, <순수형태의-여명> </h1>
+                            <p> 예술가의 지구별연구소 : 어린이 미술관에서 만날 수 있습니다
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/gallery_05.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>MMCA 소장품 : 1970-80년</h1>
+                            <p> MMCA의 다양한 아카이브를 만나보세요.
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/gallery_06.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>MMCA Talk : 아트살롱</h1>
+                            <p>미술관에 열린 예술 커뮤니티 : 강수정 학예연구관과의 토크 현장
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/gallery_07.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>MMCA 라이브 X 새소년</h1>
+                            <p>새소년과 만난 국립현대미술관, 공간과 목소리가 주는 힘!
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/now_ch_03.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>MMCA IN Cheongju</h1>
+                            <p>미술품 개방 수장고 in 청주
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                    <div class="item">
+                        <figure>
+                            <img src="img/gallery_09.png" alt="0">
+                        </figure>
+
+                        <div class="text">
+                            <h1>아날로그와 디지털의 경계</h1>
+                            <p>MMCA와 함께, '백 투 더 퓨처' 경험은 어떠세요?
+                            </p>
+                        </div><!-- .text end -->
+                    </div> <!-- .item end -->
+
+                </div><!-- .list end -->
+
+            </div><!-- .right end -->
+        </section><!-- gallery end -->
+
+
+        <!-- rev -->
+        <section class="rev">
+            <div class="inner">
+                <div class="title">
+                    <h3>Vistor Review</h3>
+                    <a>더보기</a>
+                </div><!-- .title end -->
+
+                <div class="list">
+
+                    <div class="item">
+                        <a href="#">
+                            <figure>
+                                <img src="img/rev_01.PNG" alt="rev_01">
+                            </figure>
+
+                            <div class="text">
+                                <h4>@nmART0818</h4>
+                                <p>게임사회라는 전시회랑 백투 더 퓨처 이렇게 두군대 전시회 다녀왔는데 ,
+                                    가격도 2천원이라 저렴하고 사진도 많이 찍고 시원해서 좋았어요!</p>
+                                <ul>
+                                    <li>게임상회 백투더퓨처 관람</li>
+                                    <li>2023년 8월 5일 토요일 </li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div><!-- .item end__________#1 -->
+
+                    <div class="item">
+                        <a href="#">
+                            <figure>
+                                <img src="img/rev_02.PNG" alt="rev_02">
+                            </figure>
+
+                            <div class="text">
+                                <h4>@archiving_0822</h4>
+                                <p>전시 마감전에 이건희컬렉션 이중섭 전시를 관람할 수 있어서 정말 좋았어요. 일부 작품은 무료 오디오 가이드로 감상할 수 있었어요. 엽서화, 편지화,
+                                    회화, 출판미술, 풍경화 등 다양한 작품들을 볼 수 있었어요. 좋은 경험이었습니다^^</p>
+
+                                <ul>
+                                    <li>젊은 모색 관람</li>
+                                    <li>2023년 4월 27일 목요일 </li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div><!-- .item end__________#2 -->
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .rev end -->
+
+
+
+        <!-- us -->
+        <section class="us">
+
+            <div class="inner">
+
+                <div class="title animate__animated animate__fadeInUp animate__delay-2s">
+                    <h3>Follow Us</h3>
+                    <p>@mmcakorea </p>
+
+                </div><!-- .title end  -->
+
+                <!-- Swiper -->
+                <div class="swiper follow">
+
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+
+                            <a href="#">
+
+                                <img src="img/insta_01.jpg" alt="맨우먼">
+
+                                <div class="text">
+                                    <div>
+                                        <p>471</p>
+                                    </div>
+
+                                    <div>
+                                        <p>5</p>
+                                    </div>
+                                </div><!-- .text end -->
+                            </a>
+                        </div>
+
+                        <div class="swiper-slide">
+
+                            <a href="#">
+                                <img src="img/insta_02.jpg" alt="맨우먼">
+
+                                <div class="text">
+                                    <div>
+                                        <p>116</p>
+                                    </div>
+                                    <div>
+                                        <p>22</p>
+                                    </div>
+                                </div><!-- .text end -->
+                            </a>
+                        </div>
+
+                        <div class="swiper-slide">
+
+                            <a href="#">
+                                <img src="img/insta_03.jpg" alt="뮤클리">
+
+                                <div class="text">
+
+                                    <div>
+                                        <p>890</p>
+                                    </div>
+
+                                    <div>
+                                        <p>31</p>
+                                    </div>
+
+                                </div><!-- .text end -->
+                            </a>
+                        </div>
+
+                        <div class="swiper-slide">
+
+                            <a href="#">
+                                <img src="img/insta_04.jpg" alt="도트">
+
+                                <div class="text">
+
+                                    <div>
+                                        <p>671</p>
+                                    </div>
+
+                                    <div>
+                                        <p>25</p>
+                                    </div>
+
+                                </div><!-- .text end -->
+                            </a>
+                        </div>
+
+                        <div class="swiper-slide">
+
+                            <a href="#">
+                                <img src="img/insta_01.jpg" alt="도트">
+
+                                <div class="text">
+
+                                    <div>
+                                        <p>233</p>
+                                    </div>
+
+                                    <div>
+                                        <p>15</p>
+                                    </div>
+
+                                </div><!-- .text end -->
+                            </a>
+                        </div>
+
+                    </div><!-- .wrapper end -->
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                </div><!-- .follow end -->
+            </div><!-- .inner end  -->
+
+
+        </section><!-- .us end -->
+
+
+        <!-- tv -->
+        <section class="tv">
+            <div class="title_text animate__animated animate__fadeInUp animate__delay-2s">
+                <h3>I♥MMCA</h3>
+                <p>For tomorrow, mmca</p>
+            </div><!-- .title_text end  -->
+
+            <div class="youtube animate__animated animate__fadeInUp animate__1s">
+                <div>
+                    <!-- 유튜브 연결563  315 -->
+                    <iframe width="563" height="315" src="https://www.youtube.com/embed/esa0aVPQIrc"
+                        allowfullscreen></iframe>
+                </div>
+            </div><!-- .youtube end -->
+
+        </section><!-- .tv end  -->
+
+
+        <!-- top_btn -->
+        <div class="top">
+            Top
+        </div><!-- .top end -->
+
+
+        <!-- footer  -->
+        <footer>
+            <div class="footer_top">
+                <div class="top_menu">
+
+                    <img src="img/logo_test.png" alt="로고">
+
+                    <ul>
+                        <li><a href="#">MMCA 소개</a></li>
+                        <li><a href="#">전시참여</a></li>
+                        <li><a href="#">기종/대여/대관</a></li>
+                        <li><a href="#">후원회/멤버쉽</a></li>
+                        <li><a href="#">저작권/촬영</a></li>
+                        <li><a href="#">운영방침</a></li>
+                        <li><a href="#">이용약관</a></li>
+                    </ul>
+
+                </div><!-- .top_menu end-->
+            </div><!-- .footer_top end -->
+
+            <div class="inner">
+
+                <div class="footer_info">
+                    <div>
+                        <p><strong>대표자 ｜</strong>박종달</p>
+                        <p><strong>사업자등록번호 ｜</strong> 138-83-00313</p>
+                    </div>
+
+                    <div class="add">
+
+                        <h5>[주소]</h5>
+
+                        <ul>
+                            <li>서울시 종로구 삼청로30 (소격동) </li>
+                            <li>경기도 과천시 광명로 313 (막계동)</li>
+                            <li>서울시 중구 세종대로99 (정동), 국립현대미술관 덕수궁(덕수궁 내)</li>
+                            <li>충북 청주시 청원구 상당로 314 (내덕2동 201)</li>
+                        </ul>
+
+
+                    </div><!-- .add end -->
+
+                    <div class="call">
+                        <div>
+                            <h5>[문의전화]</h5>
+
+                            <ul>
+                                <li>서울 02-3701-9500 </li>
+                                <li>과천 02‒2188‒6000 </li>
+                                <li>덕수궁 02‒2022‒0600 </li>
+                                <li>청주 043‒261‒1400 </li>
+                            </ul>
+                        </div>
+
+                        <img src="img/footer_sns.png" alt="sns_icon">
+
+                    </div><!-- .call end -->
+
+                </div><!-- footer_info -->
+
+
+                <span>© 2021 National Museum of Modern and Contemporary Art, Korea
+                </span>
+
+            </div><!-- .inner end -->
+        </footer><!-- footer end-->
+
+
+
+
+        <!-- talk_btn -->
+        <div class="talk_btn">
+            <a href="#" onclick="return false" class="talk">
+                <img src="img/icons8-점과-연설-거품-50.png" alt="0">
+            </a>
+        </div><!-- .talk_btn end  -->
+
+
+        <!-- chat_wrap -->
+        <div class="chat_wrap">
+            <div class="inner">
+                <div class="item">
+
+                    <div class="box">
+                        <p>안녕하세요</p>
+                        <span class="time">오전 11:05</span>
+                    </div><!-- .box end -->
+
+                </div><!-- .item end -->
+
+                <div class="item mymsg">
+                    <div class="box">
+                        <p>안녕하세요</p>
+                        <span class="time">오전 11:05</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <input type="text" class="mymsg" placeholder="🖤 MMCA가 알려드려요 ~">
+            <input type="text" class="yourmsg" placeholder="💬 문의하실 내용을 입력해주세요.">
+        </div><!-- .chat_wrap end -->
+
+
+    </main>
+
+
+    <div class="login">
+
+        <div class="menu_close">
+            <a href="#">
+                <img src="img/login_icon/menu_close_icon_50 (2).png" alt="닫기버튼">
+            </a>
+        </div><!-- .menu_close end -->
+
+        <form action="" method="post">
+
+            <h3 class="title">MMCA LOGIN</h3>
+
+            <fieldset>
+                <legend>개인정보입력</legend>
+
+                <div class="box">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" placeholder="아이디 입력.">
+                </div><!-- 이름기입 -->
+
+                <div class="box">
+                    <label for="name">비밀번호</label>
+                    <input type="password" id="pass" placeholder="비밀번호 입력.">
+                </div><!-- 비밀번호 기입 -->
+
+                <div class="box">
+                    <label for="">LOGIN</label>
+                    <input type="button" value="LOGIN">
+                </div><!-- LOGIN-->
+
+
+                <div>
+                    <!-- <label for=""></label> -->
+
+                    <input type="radio" id="web1" name="web" value="html" checked />
+                    <label for="web1">아이디 저장</label>
+
+                    <input type="radio" id="web2" name="web" value="css" checked />
+                    <label for="web2">비밀번호 저장</label>
+                </div>
+
+            </fieldset>
+
+
+            <!-- etc_login -->
+            <div class="etc_login">
+
+                <div class="item">
+                    <a href="#">
+                        <img src="img/login_icon/btn_login_mobile.png" alt="btn_login">
+                    </a>
+
+                    <div class="sns_login">
+                        <span>휴대폰<br>로그인</span>
+                    </div><!-- .sns_login -->
+
+                </div><!-- .item end -->
+
+                <div class="item">
+                    <a href="#">
+                        <img src="img/login_icon/btn_login_ka.png" alt="btn_login">
+                    </a>
+                    <span class="text">카카오<br>로그인</span>
+                </div><!-- .item end -->
+
+                <div class="item">
+                    <a href="#">
+                        <img src="img/login_icon/btn_login_na.png" alt="btn_login">
+                    </a>
+                    <span class="text">네이버<br>로그인</span>
+                </div><!-- .item end -->
+
+                <div class="item">
+                    <a href="#">
+                        <img src="img/login_icon/btn_login_more.png" alt="btn_login">
+                    </a>
+                    <span class="text">더보기</span>
+                </div><!-- .item end -->
+
+            </div><!-- .etc_login end -->
+
+
+            <div class="find_login">
+
+                <a href="#">
+                    아이디 찾기
+                </a>
+
+                <a href="#">
+                    비밀번호 찾기
+                </a>
+
+            </div><!-- .find_login end -->
+
+            <div class="yet">
+                <span>아직 회원이 아니세요?</span>
+                <p>회원가입</p>
+            </div><!-- .yet end -->
+
+        </form>
+
+    </div><!-- .login end -->
+
+
+</body>
+
+</html>
